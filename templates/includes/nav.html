@@ -1,0 +1,50 @@
+
+<nav class="collapse navbar sticky-top navbar-expand-md" id="collapsibleNavbar">
+    <div class="container-fluid justify-content-end justify-content-md-between px-md-3 px-4 bule">
+      <!-- Navbar cross button -->
+      <a class="text-right px-4 py-3 mobile-only navbar-cross" data-toggle="collapse" href="#collapsibleNavbar" role="button" aria-expanded="false" aria-controls="collapsibleNavbar" >
+        <i class="fas fa-times"> </i>
+      </a>
+  
+      <!-- Navbar links -->
+      <div class="navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+        {% if user['logged_in'] %}
+          <li class="nav-item">
+            <a class="nav-link" href="/home" style="height: 3.2rem;"><i class="fab fa-youtube" style="font-size: 1.5rem;"></i> YT_Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/home" style="height: 3.2rem;"> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/my_download" style="height: 3.2rem;"> My Downloads</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/" style="height: 3.2rem;"><i class="fab fa-youtube" style="font-size: 1.5rem;"></i> YT_Download</a>
+          </li>
+        {% endif %}
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+          {% if user['logged_in'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="/logout" style="height: 3.2rem;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" style="height: 3.2rem;"><i class="fas fa-user"></i> {{ user['username'] }}</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/signup" style="height: 3.2rem;"><i class="fas fa-user-plus"></i></i> Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login" style="height: 3.2rem;"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </li>
+          {% endif %} 
+        </ul>
+
+      </div>
+    </div>
+  </nav>

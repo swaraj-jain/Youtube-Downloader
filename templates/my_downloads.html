@@ -1,0 +1,102 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+<div style="margin-top: 5%;"></div>
+    <form id="search_download">
+        <div class="form-group" style="display: flex; justify-content: space-around;">
+          <div>
+            <label class="form-label">Video Type: </label>
+            <input type="text" class="form-control" id="filterInput" placeholder="Enter Video Type" onkeyup="searchinfo()">
+          </div>  
+          <div>
+            <label class="form-label">Min Video Size: </label>
+            <input type="text" class="form-control" id="filterInput1" placeholder="Entern Minimum Size" onkeyup="searchinfo()">
+          </div>
+          <div>
+            <label class="form-label">Max Video Size: </label>
+            <input type="text" class="form-control" id="filterInput2" placeholder="Enter Maxium Sixe" onkeyup="searchinfo()">
+          </div>
+        </div>
+    </form>
+    <br>
+
+<table class="table table-striped" style="text-align: center;">
+
+    <thead>
+        <tr>
+          <th scope="col">Link</th>
+          <th scope="col">Resolution</th>
+          <th scope="col">Video Type</th>
+          <th scope="col">Note</th>
+          <th scope="col">Video Size (Mb)</th>
+        </tr>
+    </thead>
+    <tbody id="downtable">
+        {% for x in my_downloads %}
+
+        <tr>
+           <td><a href="{{my_downloads[x]['youtube_url']}}" target="blank">{{my_downloads[x]['youtube_url']}}</a></td>
+           <td>{{my_downloads[x]['resolution']}}</td>
+           <td>{{my_downloads[x]['video_type']}}</td>
+           <td>{{my_downloads[x]['note']}}</td>
+           <td>{{my_downloads[x]['video_size']}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+
+
+<script>
+    const searchinfo = () => {
+        let filter=document.getElementById('filterInput').value.toUpperCase();
+        let filter1=document.getElementById('filterInput1').value.toUpperCase();
+        let filter2=document.getElementById('filterInput2').value.toUpperCase();
+
+        let t_body = document.getElementById('downtable');
+        let d_info=t_body.getElementsByTagName('tr');
+        for (var i=0 ; i<d_info.length ; i++)
+        {
+            var t_n=d_info[i].getElementsByTagName('td')[2];
+            var t_type=(t_n.textContent||t_n.innerHTML);
+
+            var t_s=d_info[i].getElementsByTagName('td')[4];
+            var t_vsiize=(t_s.textContent||t_s.innerHTML);
+
+            var res=parseFloat(t_vsiize)
+            var min_size=0;
+            var max_size=10000000000;
+
+            if(parseFloat(filter1))
+            {
+                min_size=parseFloat(filter1);
+            }
+
+            if(parseFloat(filter2))
+            {
+                max_size=parseFloat(filter2);
+            }
+
+            console.log(min_size);
+            console.log(max_size);
+
+            if(t_type.toLocaleUpperCase().indexOf(filter) > -1){
+                if(res>=min_size && res<=max_size){
+                    d_info[i].style.display='';
+                }else{
+                d_info[i].style.display='none';
+            }
+            }else{
+                d_info[i].style.display='none';
+            }
+        }
+    }
+</script>
+
+
+
+{% endblock %}

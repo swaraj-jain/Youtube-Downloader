@@ -1,0 +1,79 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+
+<form tabindex="502" method="POST" action="/signup">
+  <div class="ovf">
+    <div class="wrapper">
+      {% include 'includes/_messages.html' %}
+      <div class="title">
+        SignUp
+      </div>
+      <div class="form">
+
+        <div class="inputfield">
+            <!--<label>Phone Number <span style="color:#ff0000">*</span></label>-->
+            {{render_field(form.name, class_="form-control")}}
+          </div> 
+
+        <div class="inputfield">
+          <!--<label>Phone Number <span style="color:#ff0000">*</span></label>-->
+          {{render_field(form.email, class_="form-control")}}
+        </div> 
+
+        <div class="inputfield">
+          <!--<label>Password</label>-->
+          {{render_field(form.password, class_="form-control")}}
+       </div>
+
+       <div class="inputfield">
+        <!--<label>Password</label>-->
+        {{render_field(form.confirmed, class_="form-control")}}
+        </div>
+
+
+        <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox"  onclick="is_visible()" style="font-size: 10px;">
+            <span class="checkmark"></span>
+          </label>
+          <p>Show Password</p>
+        </div>
+
+        <div class="inputfield">
+          <input type="submit" value="Signup" class="btn">
+        </div>
+
+        <hr style="margin: 4px;">
+        <p style="text-align: center;">have an account ? <a href="/login">Login</a></p>
+        
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+<script>
+
+  const is_visible = () =>{
+
+    var x=document.getElementById("password")
+    if(x.type === "password"){
+      x.type = "text";
+    }else{
+      x .type= "password";
+    }
+  }
+
+</script>
+
+
+{% endblock %}

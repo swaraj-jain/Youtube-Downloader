@@ -1,0 +1,66 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+
+<form tabindex="502" method="POST" action="/login">
+  <div class="ovf">
+    <div class="wrapper">
+      {% include 'includes/_messages.html' %}
+      <div class="title">
+        Login
+      </div>
+      <div class="form">
+
+        <div class="inputfield">
+          <!--<label>Phone Number <span style="color:#ff0000">*</span></label>-->
+          {{render_field(form.email, class_="form-control")}}
+        </div> 
+
+        <div class="inputfield">
+          <!--<label>Password</label>-->
+          {{render_field(form.password, class_="form-control")}}
+       </div>
+
+        <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox"  onclick="is_visible()">
+            <span class="checkmark"></span>
+          </label>
+          <p>Show Password</p>
+        </div>
+
+        <div class="inputfield">
+          <input type="submit" value="Login" class="btn">
+        </div>
+
+        <hr style="margin: 4px;">
+        <p style="text-align: center;">Dont't have an account ? <a href="/signup">Signup</a></p>
+        
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+
+  const is_visible = () =>{
+
+    var x=document.getElementById("password")
+    if(x.type === "password"){
+      x.type = "text";
+    }else{
+      x .type= "password";
+    }
+  }
+
+</script>
+
+
+{% endblock %}
