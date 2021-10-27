@@ -76,6 +76,7 @@ def is_logged_in(f):
 
     return wrap
 
+################################################ index page
 
 @app.route('/')
 def index():
@@ -97,6 +98,7 @@ def login():
         users = db.child("users").get().val()
         user = None
         user_id = None
+        # find user from the database
         for x in users:
             if users[x]['email'].upper() == email.upper() and users[x]['password'] == password:
                 user = users[x]
