@@ -21,7 +21,7 @@ with TemporaryDirectory() as tmp:
  
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-
+# Keep the configuration parameters as environment variables before production
 config = {
   "apiKey": "AIzaSyD8-9NlQnBJoFeLFFlJlXBZYgcn8gKfJ5Q",
   "authDomain": "metaducator-e851a.firebaseapp.com",
@@ -39,6 +39,7 @@ db = firebase.database()
 app = Flask(__name__)
 sess = Session()
 
+# Keep in config.env in production
 app.secret_key = 'ug86ooriuygiy'
 app.config['SESSION_TYPE'] = 'filesystem'
 
@@ -236,6 +237,6 @@ def logout():
 
 
 
-
+# Remove the debug flag in production
 if __name__ == '__main__':
     app.run(debug=True)
